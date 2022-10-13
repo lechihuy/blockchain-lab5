@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FORM POST DATA TO SMART CONTRACT</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <form action="/" method="POST">
+        <div>
+            <label>Number 1</label>
+            <input type="text" id="num1" />
+        </div>
+        <div>
+            <label>Number 2</label>
+            <input type="text" id="num2" />
+        </div>
+        <button type="submit">Submit</button>
+        <h1 id="sum"></h1>
+        <h1 id="multiply"></h1>
+    </form>
+    <script>
+        document.querySelector('button')
+            .addEventListener('click', (e) => {
+                e.preventDefault();
+                const num1 = document.querySelector('#num1').value;
+                const num2 = document.querySelector('#num2').value;
+
+                fetch('/', {
+                    method: 'POST',
+                    headers: {
+                        Authorization: 'VLU student',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        num1,
+                        num2
+                    })
+                }).then((res) => {
+                    return res.json();
+                }).then((data1) => {
+                    document.getElementById('sum').innerText = data1['sum'];
+                    document.getElementById('multiply').innerText = data1['product'];
+                })
+            })
+    </script>
+</body>
+</html>
